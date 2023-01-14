@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.tzuhsien.taipeizoo.ZooApplication
 import com.tzuhsien.taipeizoo.databinding.FragmentAreaBinding
 import com.tzuhsien.taipeizoo.ext.loadImage
+import com.tzuhsien.taipeizoo.network.LoadApiStatus
 
 
 class AreaFragment : Fragment() {
@@ -52,6 +53,11 @@ class AreaFragment : Fragment() {
 
         viewModel.navigateToAnimal.observe(viewLifecycleOwner) {
             findNavController().navigate(AreaFragmentDirections.actionAreaFragmentToAnimalFragment(it))
+        }
+
+        /** Loading status **/
+        viewModel.status.observe(viewLifecycleOwner) {
+            binding.imgLoader.visibility = if (it == LoadApiStatus.DONE) View.GONE else View.VISIBLE
         }
 
         return binding.root

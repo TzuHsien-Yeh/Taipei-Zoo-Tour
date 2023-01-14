@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.tzuhsien.taipeizoo.R
 import com.tzuhsien.taipeizoo.ZooApplication
 import com.tzuhsien.taipeizoo.area.AreaViewModel
 import com.tzuhsien.taipeizoo.databinding.FragmentHomeBinding
+import com.tzuhsien.taipeizoo.network.LoadApiStatus
 
 class HomeFragment : Fragment() {
 
@@ -37,6 +39,11 @@ class HomeFragment : Fragment() {
 
         viewModel.navigateToArea.observe(viewLifecycleOwner) {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAreaFragment(it))
+        }
+
+        /** Loading status **/
+        viewModel.status.observe(viewLifecycleOwner) {
+            binding.imgLoader.visibility = if (it == LoadApiStatus.DONE) View.GONE else View.VISIBLE
         }
 
         return binding.root
