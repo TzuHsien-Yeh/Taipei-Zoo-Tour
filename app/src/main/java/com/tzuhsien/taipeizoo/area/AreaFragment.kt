@@ -1,5 +1,7 @@
 package com.tzuhsien.taipeizoo.area
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.tzuhsien.taipeizoo.ZooApplication
 import com.tzuhsien.taipeizoo.databinding.FragmentAreaBinding
+import com.tzuhsien.taipeizoo.ext.loadImage
 
 
 class AreaFragment : Fragment() {
@@ -27,11 +30,17 @@ class AreaFragment : Fragment() {
         val appContainer = (requireContext().applicationContext as ZooApplication).container
         viewModel = AreaViewModel(appContainer.zooRepository, AreaFragmentArgs.fromBundle(requireArguments()).areaKey)
 
+        // Set up toolbar with are name
         (activity as AppCompatActivity).supportActionBar?.title = viewModel.area.eName
-//        val act = activity as AppCompatActivity?
-//        if (act!!.supportActionBar != null) {
-//            val toolbar: Toolbar = act!!.supportActionBar!!.customView as Toolbar
-//        }
+
+        binding.imgArea.loadImage(viewModel.area.ePicUrl)
+        binding.txtAreaInfo.text = viewModel.area.eInfo
+        binding.txtAreaCategory.text = viewModel.area.eCategory
+        binding.txtOpenInBrowser.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(viewModel.area.eUrl))
+            startActivity(browserIntent)
+        }
+
         return binding.root
     }
 
