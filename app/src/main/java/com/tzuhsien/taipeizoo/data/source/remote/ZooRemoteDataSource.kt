@@ -2,6 +2,7 @@ package com.tzuhsien.taipeizoo.data.source.remote
 
 import com.tzuhsien.taipeizoo.R
 import com.tzuhsien.taipeizoo.data.Result
+import com.tzuhsien.taipeizoo.data.model.AnimalResult
 import com.tzuhsien.taipeizoo.data.model.AreaResult
 import com.tzuhsien.taipeizoo.data.source.ZooDataSource
 import com.tzuhsien.taipeizoo.network.ZooApiService
@@ -23,6 +24,21 @@ class ZooRemoteDataSource (private val zooService: ZooApiService) : ZooDataSourc
 
         return try {
             val result = zooService.getAreaInfo(PATH_AREA, SCOPE)
+            Result.Success(result)
+
+        } catch (e: Exception) {
+            Timber.w(" exception=${e.message}")
+            Result.Error(e)
+        }
+    }
+
+    override suspend fun getAnimalInfo(): Result<AnimalResult> {
+        if (!isInternetConnected()) {
+            return Result.Fail(getString(R.string.internet_not_connected))
+        }
+
+        return try {
+            val result = zooService.getAnimalInfo(PATH_ANIMAL, SCOPE)
             Result.Success(result)
 
         } catch (e: Exception) {

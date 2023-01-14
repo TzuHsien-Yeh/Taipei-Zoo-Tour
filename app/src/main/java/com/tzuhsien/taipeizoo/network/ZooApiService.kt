@@ -1,5 +1,6 @@
 package com.tzuhsien.taipeizoo.network
 
+import com.tzuhsien.taipeizoo.data.model.AnimalResult
 import com.tzuhsien.taipeizoo.data.model.AreaResult
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,4 +17,9 @@ interface ZooApiService {
         @Query("scope") scope: String
     ): AreaResult
 
+    @GET("$ENDPOINT{resource_id}")
+    suspend fun getAnimalInfo(
+        @Path("resource_id") resourceId: String,
+        @Query("scope") scope: String
+    ): AnimalResult
 }

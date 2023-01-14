@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import com.tzuhsien.taipeizoo.ZooApplication
 import com.tzuhsien.taipeizoo.databinding.FragmentAreaBinding
 import com.tzuhsien.taipeizoo.ext.loadImage
@@ -39,6 +40,12 @@ class AreaFragment : Fragment() {
         binding.txtOpenInBrowser.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(viewModel.area.eUrl))
             startActivity(browserIntent)
+        }
+
+        val adapter = AnimalAdapter(uiState = viewModel.uiState)
+        binding.recyclerViewAnimal.adapter = adapter
+        viewModel.AnimalList.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
         }
 
         return binding.root
