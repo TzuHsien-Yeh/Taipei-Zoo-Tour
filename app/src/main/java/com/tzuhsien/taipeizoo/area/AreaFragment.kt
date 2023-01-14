@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.tzuhsien.taipeizoo.ZooApplication
 import com.tzuhsien.taipeizoo.databinding.FragmentAreaBinding
@@ -46,7 +45,7 @@ class AreaFragment : Fragment() {
 
         val adapter = AnimalAdapter(uiState = viewModel.uiState)
         binding.recyclerViewAnimal.adapter = adapter
-        viewModel.AnimalList.observe(viewLifecycleOwner) {
+        viewModel.animalList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
             binding.txtNoInfo.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
         }
@@ -57,7 +56,15 @@ class AreaFragment : Fragment() {
 
         /** Loading status **/
         viewModel.status.observe(viewLifecycleOwner) {
-            binding.imgLoader.visibility = if (it == LoadApiStatus.DONE) View.GONE else View.VISIBLE
+            binding.imgLoader.visibility = if (it == LoadApiStatus.LOADING) View.VISIBLE else View.GONE
+        }
+
+        viewModel.error.observe(viewLifecycleOwner) {
+            if (null != it) {
+                binding.txtError.text = it
+            } else {
+                binding.txtError.visibility = View.GONE
+            }
         }
 
         return binding.root

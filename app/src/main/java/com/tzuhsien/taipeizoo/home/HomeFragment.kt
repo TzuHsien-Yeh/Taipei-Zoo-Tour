@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
         // RecyclerView
         val adapter = AreaAdapter(viewModel.uiState)
         binding.recyclerViewArea.adapter = adapter
-        viewModel.AreaList.observe(viewLifecycleOwner) {
+        viewModel.areaList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 
@@ -43,7 +43,15 @@ class HomeFragment : Fragment() {
 
         /** Loading status **/
         viewModel.status.observe(viewLifecycleOwner) {
-            binding.imgLoader.visibility = if (it == LoadApiStatus.DONE) View.GONE else View.VISIBLE
+            binding.imgLoader.visibility = if (it == LoadApiStatus.LOADING) View.VISIBLE else View.GONE
+        }
+
+        viewModel.error.observe(viewLifecycleOwner) {
+            if (null != it) {
+                binding.txtError.text = it
+            } else {
+                binding.txtError.visibility = View.GONE
+            }
         }
 
         return binding.root

@@ -22,9 +22,9 @@ class AreaViewModel(
     val area: Area
 ) : ViewModel() {
 
-    private val _AnimalList = MutableLiveData<List<Animal>>()
-    val AnimalList: LiveData<List<Animal>>
-        get() = _AnimalList
+    private val _animalList = MutableLiveData<List<Animal>>()
+    val animalList: LiveData<List<Animal>>
+        get() = _animalList
 
     private val _status = MutableLiveData<LoadApiStatus>()
     val status: LiveData<LoadApiStatus>
@@ -90,7 +90,7 @@ class AreaViewModel(
 
         Timber.d("list $list")
         Timber.d("list.filter { it.aLocation == area.eName } = ${list.filter { it.aLocation == area.eName }}")
-        _AnimalList.value = list.filter { it.aLocation == area.eName }
+        _animalList.value = list.filter { it.aLocation == area.eName }
 
     }
 

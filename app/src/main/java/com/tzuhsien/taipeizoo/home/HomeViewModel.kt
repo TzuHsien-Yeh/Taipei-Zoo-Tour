@@ -20,9 +20,9 @@ class HomeViewModel(
     private val zooRepository: ZooRepository
 ): ViewModel() {
 
-    private val _AreaList = MutableLiveData<List<Area>>()
-    val AreaList: LiveData<List<Area>>
-        get() = _AreaList
+    private val _areaList = MutableLiveData<List<Area>>()
+    val areaList: LiveData<List<Area>>
+        get() = _areaList
 
     val uiState = HomeUiState(
         onClick = {
@@ -87,7 +87,7 @@ class HomeViewModel(
         }
 
         Timber.d("list $list")
-        _AreaList.value = list
+        _areaList.value = list
     }
 
     private fun navigateToAreaPage(area: Area) {

@@ -25,13 +25,13 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = binding.toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(true)
+        supportActionBar?.title = getString(R.string.taipei_zoo)
 
-        navController.addOnDestinationChangedListener { controller, destination, _ ->
+        navController.addOnDestinationChangedListener { _, destination, _ ->
 
             when (destination.id) {
                 R.id.homeFragment -> {
                     toolbar.setNavigationIcon(R.drawable.ic_menu)
-                    toolbar.title = getString(R.string.taipei_zoo)
                 }
 
                 R.id.areaFragment -> {
