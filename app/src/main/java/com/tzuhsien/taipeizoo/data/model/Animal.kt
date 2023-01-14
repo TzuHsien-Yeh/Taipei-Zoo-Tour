@@ -1,10 +1,14 @@
 package com.tzuhsien.taipeizoo.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
+@Parcelize
 data class Animal(
     @SerializedName("_id") val id: Int,
-    @SerializedName("_importdate") val importDate: ImportDate,
+    @SerializedName("_importdate") val importDate: @RawValue ImportDate,
     @SerializedName("a_adopt") val aAdopt: String,
     @SerializedName("a_alsoknown") val aAlsoKnown: String,
     @SerializedName("a_behavior") val aBehavior: String,
@@ -51,4 +55,4 @@ data class Animal(
 //    @SerializedName("a_") val aVoice02Url: String,
 //    @SerializedName("a_") val aVoice03Alt: String,
 //    @SerializedName("a_") val aVoice03Url: String
-)
+): Parcelable

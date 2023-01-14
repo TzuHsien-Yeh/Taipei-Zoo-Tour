@@ -33,5 +33,10 @@
         android:id="@+id/animalFragment"
         android:name="com.tzuhsien.taipeizoo.animal.AnimalFragment"
         android:label="fragment_animal"
-        tools:layout="@layout/fragment_animal" />
+        tools:layout="@layout/fragment_animal">
+        <argument
+            android:name="animal_key"
+            app:argType="com.tzuhsien.taipeizoo.data.model.Animal"
+            app:nullable="false" />
+    </fragment>
 </navigation>

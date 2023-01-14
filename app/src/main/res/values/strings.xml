@@ -4,4 +4,9 @@
     <string name="internet_not_connected">未連接網路</string>
     <string name="animal_info">動物資料</string>
     <string name="open_in_browser">觀看語音導覽影片</string>
+    <string name="animal_also_known">別名</string>
+    <string name="animal_feature">形態特徵</string>
+    <string name="animal_behavior">生態習性</string>
+    <string name="animal_update">最後更新: %1s</string>
+    <string name="no_info">尚無資料</string>
 </resources>

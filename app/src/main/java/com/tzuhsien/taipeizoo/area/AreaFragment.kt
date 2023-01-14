@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import androidx.navigation.fragment.findNavController
 import com.tzuhsien.taipeizoo.ZooApplication
 import com.tzuhsien.taipeizoo.databinding.FragmentAreaBinding
 import com.tzuhsien.taipeizoo.ext.loadImage
@@ -31,7 +32,7 @@ class AreaFragment : Fragment() {
         val appContainer = (requireContext().applicationContext as ZooApplication).container
         viewModel = AreaViewModel(appContainer.zooRepository, AreaFragmentArgs.fromBundle(requireArguments()).areaKey)
 
-        // Set up toolbar with are name
+        // Set up toolbar with area name
         (activity as AppCompatActivity).supportActionBar?.title = viewModel.area.eName
 
         binding.imgArea.loadImage(viewModel.area.ePicUrl)
@@ -46,6 +47,11 @@ class AreaFragment : Fragment() {
         binding.recyclerViewAnimal.adapter = adapter
         viewModel.AnimalList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
+            binding.txtNoInfo.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
+        }
+
+        viewModel.navigateToAnimal.observe(viewLifecycleOwner) {
+            findNavController().navigate(AreaFragmentDirections.actionAreaFragmentToAnimalFragment(it))
         }
 
         return binding.root
