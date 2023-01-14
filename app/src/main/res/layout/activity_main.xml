@@ -13,14 +13,6 @@
         app:navigationIcon="@drawable/ic_menu"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/toolbar_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:textSize="18sp"
-            tools:text="@string/taipei_zoo"/>
-
     </androidx.appcompat.widget.Toolbar>
 
     <fragment
