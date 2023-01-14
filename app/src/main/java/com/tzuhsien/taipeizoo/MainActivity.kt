@@ -1,14 +1,11 @@
 package com.tzuhsien.taipeizoo
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.viewbinding.BuildConfig
 import com.tzuhsien.taipeizoo.databinding.ActivityMainBinding
-import timber.log.Timber
 
 private const val ICON_ALPHA = 130
 
@@ -22,11 +19,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        // initialize timber
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
 
         navController = findNavController(R.id.nav_host_fragment_activity_main)
 

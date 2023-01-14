@@ -27,7 +27,7 @@ class AreaFragment : Fragment() {
 
         // Gets zooRepository from the instance of AppContainer in Application
         val appContainer = (requireContext().applicationContext as ZooApplication).container
-        viewModel = AreaViewModel(appContainer.zooRepository)
+        viewModel = AreaViewModel(appContainer.zooRepository, AreaFragmentArgs.fromBundle(requireArguments()).areaKey)
 
         return binding.root
     }

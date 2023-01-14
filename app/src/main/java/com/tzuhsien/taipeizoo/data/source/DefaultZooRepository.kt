@@ -1,8 +1,12 @@
 package com.tzuhsien.taipeizoo.data.source
 
-import com.tzuhsien.taipeizoo.data.source.remote.ZooRemoteDataSource
-import com.tzuhsien.taipeizoo.network.ZooApiService
+import com.tzuhsien.taipeizoo.data.model.AreaResult
+import com.tzuhsien.taipeizoo.data.Result
 
 class DefaultZooRepository (
-    private val remoteDataSource: ZooDataSource
-) : ZooRepository {}
+    private val zooRemoteDataSource: ZooDataSource
+) : ZooRepository {
+    override suspend fun getAreaInfo(): Result<AreaResult> {
+        return zooRemoteDataSource.getAreaInfo()
+    }
+}

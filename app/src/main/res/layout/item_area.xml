@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    
+    <ImageView
+        android:id="@+id/area_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="16dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_area_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="4dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/area_image"
+        app:layout_constraintStart_toEndOf="@id/area_image"
+        tools:text="昆蟲館"/>
+
+    <TextView
+        android:id="@+id/txt_area_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="15sp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        app:layout_constraintTop_toBottomOf="@id/txt_area_name"
+        app:layout_constraintStart_toEndOf="@id/area_image"
+        app:layout_constraintEnd_toStartOf="@id/ic_to_detail"
+        tools:text="自有人類文明發展以來，動物以及自然與人類的關係便開始有著多樣動態的平衡，有的時候是動物傷害人類，有的時候是大自然對人類濫用資源的反撲，但多半時候都是人類因不同的目的而使用動物。兒童區的展示邏輯希望能讓遊客在與動物最近的距離重新檢視人與動物的關係。\n兒童動物區的設計以「學習園地」為主軸，內有可愛動物、農村動物、農村生態等展示區，其中包含了農村常見的家禽如鴨、雞；家畜如羊駝、迷你馬等，這些動物都是早經人類馴服及利用，對人類文明的發展貢獻很大。簡單來說，將「生態教育」融入農村風景中是兒童動物區展示的特色。\n兒童區的多樣物種展示，包括作物生態展示、農莊動物展示區、小型食肉目動物展示區、靈長類區、外來種區以及動物行為學院，就是依循著人類與動物關係的演變而規劃的展示。其中農莊相關展示除了不定期的稻作及水車展現臺灣先民以農立國的精神外，也讓都市人可以體驗實際鄉村的生活情懷。家禽區的開放展示讓遊客在兒童區漫步時，得以有不定期與雞鴨鵝群相遇的驚喜。走入式有蹄動物配合定時餵食讓遊客可以更近距離觀察奇蹄與偶蹄目的外觀差異。靈長類區則有著非洲舊世界猴與冠鶴的混種展示。\n為了加深民眾對於野生動物的瞭解，原來的兒童劇場改造後落成的「動物行為學院」，搭配「動物空中走道」銜接戶外活動場，動物可由此處自行進入學院內，未來民眾將有更多的機會近距離觀察與認識動物。除此之外，在廊道的中途設置了精巧可愛的樹屋，吸引動物在此停留，記得?起頭看看上方的廊道，或許剛好有狐猴經過，就能以不同的角度，欣賞牠們身手矯健的身影唷！"/>
+
+    <ImageView
+        android:id="@+id/ic_to_detail"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/ic_arrow"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toTopOf="@id/txt_area_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:scaleX="-1"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

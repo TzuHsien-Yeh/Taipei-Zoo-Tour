@@ -14,6 +14,7 @@
             android:id="@+id/action_homeFragment_to_areaFragment"
             app:destination="@id/areaFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/areaFragment"
         android:name="com.tzuhsien.taipeizoo.area.AreaFragment"
@@ -22,7 +23,12 @@
         <action
             android:id="@+id/action_areaFragment_to_animalFragment"
             app:destination="@id/animalFragment" />
+        <argument
+            android:name="area_key"
+            app:argType="com.tzuhsien.taipeizoo.data.model.Area"
+            app:nullable="false" />
     </fragment>
+
     <fragment
         android:id="@+id/animalFragment"
         android:name="com.tzuhsien.taipeizoo.animal.AnimalFragment"

@@ -1,9 +1,12 @@
 package com.tzuhsien.taipeizoo.data
 
+import com.tzuhsien.taipeizoo.BuildConfig
 import com.tzuhsien.taipeizoo.data.source.DefaultZooRepository
 import com.tzuhsien.taipeizoo.data.source.ZooRepository
 import com.tzuhsien.taipeizoo.data.source.remote.ZooRemoteDataSource
 import com.tzuhsien.taipeizoo.network.ZooApiService
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -20,14 +23,32 @@ interface AppContainer {
  * Variables are initialized lazily and the same instance is shared across the whole app.
  */
 class DefaultAppContainer : AppContainer {
-    private val BASE_URL = "https://data.taipei/api/v1/dataset/"
+    private val BASE_URL = "https://data.taipei/api/v1/"
 
+    private val loggingInterceptor =
+        HttpLoggingInterceptor().setLevel(
+            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
+            else HttpLoggingInterceptor.Level.NONE
+        )
+
+    private val client = OkHttpClient.Builder()
+        .addInterceptor(loggingInterceptor)
+        .addInterceptor { chain ->
+            val url = chain
+                .request()
+                .url
+                .newBuilder()
+                .build()
+            chain.proceed(chain.request().newBuilder().url(url).build())
+        }
+        .build()
     /**
      * Use the Retrofit builder to build a retrofit object using Gson converter
      */
     private val retrofit: Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
         .baseUrl(BASE_URL)
+        .client(client)
         .build()
 
     /**
