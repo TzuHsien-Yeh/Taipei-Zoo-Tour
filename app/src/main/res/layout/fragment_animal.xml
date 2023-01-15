@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".animal.AnimalFragment">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_animal"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_animal_name_ch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_animal" />
+
+            <TextView
+                android:id="@+id/txt_animal_name_latin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="2dp"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_animal_name_ch"
+                tools:text="大熊貓" />
+
+            <TextView
+                android:id="@+id/txt_also_known"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@id/txt_animal_name_latin"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/animal_also_known" />
+
+            <TextView
+                android:id="@+id/txt_animal_also_known"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="2dp"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@id/txt_also_known"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="貓熊、熊貓" />
+
+            <TextView
+                android:id="@+id/txt_feature"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@id/txt_animal_also_known"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/animal_feature" />
+
+            <TextView
+                android:id="@+id/txt_animal_feature"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="2dp"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@id/txt_feature"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="貓熊、熊貓" />
+
+            <TextView
+                android:id="@+id/txt_behavior"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="8dp"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@id/txt_animal_feature"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/animal_behavior" />
+
+            <TextView
+                android:id="@+id/txt_animal_behavior"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="2dp"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@id/txt_behavior"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="貓熊、熊貓" />
+
+            <TextView
+                android:id="@+id/txt_animal_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="24dp"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@id/txt_animal_behavior"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="2022" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
