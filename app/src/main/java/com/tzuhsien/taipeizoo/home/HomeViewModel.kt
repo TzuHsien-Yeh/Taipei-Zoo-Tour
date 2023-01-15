@@ -80,7 +80,7 @@ class HomeViewModel(
         }
     }
 
-    private fun putToItemList(data: AreaResult) {
+    fun putToItemList(data: AreaResult) {
         val list = mutableListOf<Area>()
         for (area in data.result.results) {
             list.add(area)
@@ -90,7 +90,7 @@ class HomeViewModel(
         _areaList.value = list
     }
 
-    private fun navigateToAreaPage(area: Area) {
+    fun navigateToAreaPage(area: Area) {
         _navigateToArea.value = area
     }
 

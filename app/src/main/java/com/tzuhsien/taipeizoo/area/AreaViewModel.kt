@@ -82,7 +82,7 @@ class AreaViewModel(
         }
     }
 
-    private fun putToItemList(data: AnimalResult) {
+    fun putToItemList(data: AnimalResult) {
         val list = mutableListOf<Animal>()
         for (a in data.result.results) {
             list.add(a)
@@ -94,7 +94,7 @@ class AreaViewModel(
 
     }
 
-    private fun navigateToAnimalPage(animal: Animal) {
+    fun navigateToAnimalPage(animal: Animal) {
         _navigateToAnimal.value = animal
     }
 
