@@ -8,6 +8,7 @@ import com.tzuhsien.taipeizoo.data.model.*
 import com.tzuhsien.taipeizoo.data.source.FakeZooRepository
 import com.tzuhsien.taipeizoo.getOrAwaitValue
 import com.tzuhsien.taipeizoo.home.HomeViewModel
+import com.tzuhsien.taipeizoo.network.LoadApiStatus
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Assert.*
 import org.junit.Before
@@ -27,9 +28,34 @@ class AreaViewModelTest {
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
 
+
+    private val fakeZooRepository = FakeZooRepository()
+
     @Before
     fun setupViewModel() {
-        areaViewModel = AreaViewModel(FakeZooRepository(), Area(0, "a", "b", "tropical", "d", "e"))
+        areaViewModel = AreaViewModel(fakeZooRepository, Area(0, "a", "b", "tropical", "d", "e"))
+    }
+
+    @Test
+    fun getAreaInfo_networkError_returnErrorMsg(){
+        // Given the situation of network error
+        fakeZooRepository.setShouldReturnNetworkError(true)
+
+        areaViewModel.getAnimalInfo()
+
+        assertThat(areaViewModel.error.getOrAwaitValue()).isEqualTo("Error")
+        assertThat(areaViewModel.status.getOrAwaitValue()).isEqualTo(LoadApiStatus.ERROR)
+        assertThat(areaViewModel.animalData).isEqualTo(null)
+    }
+
+    @Test
+    fun getAreaInfo_network_returnSuccess(){
+
+        areaViewModel.getAnimalInfo()
+
+        assertThat(areaViewModel.error.getOrAwaitValue()).isEqualTo(null)
+        assertThat(areaViewModel.status.getOrAwaitValue()).isNotEqualTo(LoadApiStatus.ERROR)
+        assertThat(areaViewModel.animalData).isEqualTo(fakeZooRepository.animalResult)
     }
 
     @Test
@@ -39,7 +65,8 @@ class AreaViewModelTest {
             Animal(1, "a", "b", "c", "tropical", "e", "f", "g", "h"),
             Animal(2, "a", "b", "c", "d", "e", "f", "g", "h"),
             Animal(3, "a", "b", "c", "tropical", "e", "f", "g", "h"),
-            Animal(4, "a", "b", "c", "d", "e", "f", "g", "h")        )
+            Animal(4, "a", "b", "c", "d", "e", "f", "g", "h")
+        )
 
         val data = AnimalResult(ResultAnimal(0,
             0,
@@ -47,7 +74,8 @@ class AreaViewModelTest {
             animals,
             "a"))
 
-        areaViewModel.putToItemList(data)
+        areaViewModel.animalData = data
+        areaViewModel.putToItemList()
 
         val predicate: (Animal) -> Boolean = { it.aLocation == areaViewModel.area.eName }
         assertThat(areaViewModel.animalList.getOrAwaitValue().all(predicate)).isTrue()

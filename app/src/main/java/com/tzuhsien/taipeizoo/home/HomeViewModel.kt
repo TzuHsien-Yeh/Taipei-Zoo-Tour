@@ -20,6 +20,8 @@ class HomeViewModel(
     private val zooRepository: ZooRepository
 ): ViewModel() {
 
+    var areaData: AreaResult? = null
+
     private val _areaList = MutableLiveData<List<Area>>()
     val areaList: LiveData<List<Area>>
         get() = _areaList
@@ -46,7 +48,7 @@ class HomeViewModel(
         getAreaInfo()
     }
 
-    private fun getAreaInfo() {
+    fun getAreaInfo() {
 
         viewModelScope.launch {
 
@@ -62,7 +64,8 @@ class HomeViewModel(
                     _status.value = LoadApiStatus.DONE
 
                     Timber.d("result.data = ${result.data}")
-                    putToItemList(result.data)
+                    areaData = result.data
+                    putToItemList()
                 }
                 is Result.Fail -> {
                     _error.value = result.error
@@ -80,14 +83,16 @@ class HomeViewModel(
         }
     }
 
-    fun putToItemList(data: AreaResult) {
-        val list = mutableListOf<Area>()
-        for (area in data.result.results) {
-            list.add(area)
-        }
+    fun putToItemList() {
+        areaData?.let {
+            val list = mutableListOf<Area>()
+            for (area in it.result.results) {
+                list.add(area)
+            }
 
-        Timber.d("list $list")
-        _areaList.value = list
+            Timber.d("list $list")
+            _areaList.value = list
+        }
     }
 
     fun navigateToAreaPage(area: Area) {

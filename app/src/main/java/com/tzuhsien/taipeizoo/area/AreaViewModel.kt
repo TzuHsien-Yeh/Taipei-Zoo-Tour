@@ -9,6 +9,7 @@ import com.tzuhsien.taipeizoo.data.Result
 import com.tzuhsien.taipeizoo.data.model.Animal
 import com.tzuhsien.taipeizoo.data.model.AnimalResult
 import com.tzuhsien.taipeizoo.data.model.Area
+import com.tzuhsien.taipeizoo.data.model.AreaResult
 import com.tzuhsien.taipeizoo.data.source.ZooRepository
 import com.tzuhsien.taipeizoo.network.LoadApiStatus
 import com.tzuhsien.taipeizoo.util.Util.getString
@@ -21,6 +22,8 @@ class AreaViewModel(
     private val zooRepository: ZooRepository,
     val area: Area
 ) : ViewModel() {
+
+    var animalData: AnimalResult? = null
 
     private val _animalList = MutableLiveData<List<Animal>>()
     val animalList: LiveData<List<Animal>>
@@ -45,10 +48,10 @@ class AreaViewModel(
         get() =  _navigateToAnimal
 
     init {
-        getAreaInfo()
+        getAnimalInfo()
     }
 
-    private fun getAreaInfo() {
+    fun getAnimalInfo() {
 
         viewModelScope.launch {
 
@@ -64,7 +67,8 @@ class AreaViewModel(
                     _status.value = LoadApiStatus.DONE
 
                     Timber.d("result.data = ${result.data}")
-                    putToItemList(result.data)
+                    animalData = result.data
+                    putToItemList()
                 }
                 is Result.Fail -> {
                     _error.value = result.error
@@ -82,16 +86,18 @@ class AreaViewModel(
         }
     }
 
-    fun putToItemList(data: AnimalResult) {
-        val list = mutableListOf<Animal>()
-        for (a in data.result.results) {
-            list.add(a)
+    fun putToItemList() {
+        animalData?.let {
+            val list = mutableListOf<Animal>()
+            for (a in it.result.results) {
+                list.add(a)
+            }
+
+            Timber.d("list $list")
+            Timber.d("list.filter { it.aLocation == area.eName } = ${list.filter { it.aLocation == area.eName }}")
+            _animalList.value = list.filter { it.aLocation == area.eName }
+
         }
-
-        Timber.d("list $list")
-        Timber.d("list.filter { it.aLocation == area.eName } = ${list.filter { it.aLocation == area.eName }}")
-        _animalList.value = list.filter { it.aLocation == area.eName }
-
     }
 
     fun navigateToAnimalPage(animal: Animal) {
